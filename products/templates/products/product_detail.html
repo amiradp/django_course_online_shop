@@ -3,6 +3,7 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% load comment_tags %}
+{% load i18n %}
 
 {% block title %}
     {{ product.title }}
@@ -192,7 +193,7 @@
                                                     <form action="{% url 'comment_create' product.id %}" method="POST">
                                                         {% csrf_token %}
                                                         {{ comment_form|crispy }}
-                                                        <input type="submit" value="ارسال">
+                                                        <input type="submit" value="{% trans 'Submit' %}">
                                                     </form>
 {#                                                    <form action="#" class="form text-right">#}
 {#                                                        <div class="form-notes mb--20">#}
