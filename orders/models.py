@@ -16,8 +16,13 @@ class Order(models.Model):
     datetime_created = models.DateTimeField(auto_now_add=True)
     datetime_modified = models.DateTimeField(auto_now=True)
 
+    zarinpal_authority = models.CharField(max_length=250, blank=True)
+
     def __str__(self):
         return f'order {self.id}'
+
+    def get_total_price(self):
+        return sum(item.quantity * item.price for item in self.items.all())
 
 
 class OrderItem(models.Model):

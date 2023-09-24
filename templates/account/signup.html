@@ -5,9 +5,22 @@
 {% block title %} Sing UP {% endblock %}
 
 {% block content %}
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ form|crispy }}
-        <input type="submit" value="Sign Up">
-    </form>
+        <!-- Page Header Start -->
+    <div class="container-fluid bg-secondary mb-5">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">ثبت نام</h1>
+            <div class="d-inline-flex">
+                <p class="m-0"><a href="{% url 'ProductListView' %}">صفحه اصلی</a></p>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+<form action="" method="post" class="container mt-5 border p-5 rounded-2">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <div class="text-center">
+        <input type="submit" value="ثبت نام" class="bg-primary p-1 btn btn-primary">
+    </div>
+</form>
 {% endblock %}

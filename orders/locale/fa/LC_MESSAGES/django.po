@@ -1,0 +1,80 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-09-15 19:37+0330\n"
+"PO-Revision-Date: 2023-09-18 01:01+0330\n"
+"Last-Translator:   <amir@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Translated-Using: django-rosetta 0.9.9\n"
+
+#: .\templates\orders\order_created.html:14
+#: .\templates\orders\order_created.html:18
+msgid "Checkout"
+msgstr "پرداخت"
+
+#: .\templates\orders\order_created.html:16
+msgid "Home"
+msgstr "صفحه اصلی"
+
+#: .\templates\orders\order_created.html:30
+msgid "Billing Address"
+msgstr "مشخصات فرد خریدار"
+
+#: .\templates\orders\order_created.html:35
+msgid "First Name"
+msgstr "نام"
+
+#: .\templates\orders\order_created.html:40
+msgid "Last Name"
+msgstr "نام خانوادگی"
+
+#: .\templates\orders\order_created.html:45
+msgid "Mobile No"
+msgstr "تلفن همراه"
+
+#: .\templates\orders\order_created.html:50
+msgid "Address Line"
+msgstr "آدرس"
+
+#: .\templates\orders\order_created.html:55
+msgid "Note"
+msgstr "توضیحات"
+
+#: .\templates\orders\order_created.html:62
+msgid "Place Order"
+msgstr "ثبت سفارش"
+
+#: .\templates\orders\order_created.html:71
+msgid "Order Total"
+msgstr "مجموع سفارش"
+
+#: .\templates\orders\order_created.html:74
+msgid "Products"
+msgstr "محصولات"
+
+#: .\templates\orders\order_created.html:84
+msgid "Total"
+msgstr "مجموع"
+
+#: .\templates\orders\order_created.html:85
+msgid "$"
+msgstr "تومان"
+
+#: .\templates\orders\order_created.html:91
+msgid "Payment"
+msgstr "پرداخت از"
+
+#: .\templates\orders\order_created.html:97
+msgid "Zarin pal"
+msgstr "زرین پال"

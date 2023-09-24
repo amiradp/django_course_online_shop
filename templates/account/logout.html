@@ -6,11 +6,14 @@
 
 {% block content %}
 <form action="" method="post">
-    <h1>Log out</h1>
-    <h2>Are you sure you want to logout?</h2>
     {% csrf_token %}
-    {{ form|crispy }}
-    <input type="submit" value="Log Out">
+    <div class="container mt-5 border p-5 rounded-2 text-center">
+        <h1>خروج از حساب</h1>
+        <h2>ایا میخواهید از حساب خود خارج شوید؟</h2>
+        {{ form|crispy }}
+        <a href="{% url 'ProductListView' %}" class="mt-5 btn btn-success">برگشت به صفحه اصلی</a>
+        <input type="submit" value="خروج" class="mt-5 btn btn-danger">
+    </div>
 </form>
 
 {% endblock %}

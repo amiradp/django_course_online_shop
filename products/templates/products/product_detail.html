@@ -4,248 +4,129 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% load comment_tags %}
-{% load i18n %}
+{% load jalali_tags %}
+{% load humanize %}
+
+{% load persian_translation_tags %}
 
 {% block title %}
     {{ product.title }}
 {% endblock title %}
 
 {% block content %}
-    <!-- Breadcrumb area Start -->
-    <div class="breadcrumb-area bg-color ptb--90" data-bg-color="#f6f6f6">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="d-flex justify-content-between align-items-center flex-sm-row flex-column">
-                        <h1 class="page-title">جزئیات محصول «{{ product.title }}»</h1>
-                    </div>
-                </div>
+
+    <!-- Page Header Start -->
+    <div class="container-fluid bg-secondary mb-5">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">{% trans 'Shop Detail' %}</h1>
+            <div class="d-inline-flex">
+                <p class="m-0"><a href="{% url 'ProductListView' %}">{% trans 'Home' %}</a></p>
+                <p class="m-0 px-2">-</p>
+                <p class="m-0">{% trans 'Shop Detail' %} "{{ product.title }}"</p>
             </div>
         </div>
     </div>
-    <!-- Breadcrumb area End -->
+    <!-- Page Header End -->
 
-    <!-- Main Content Wrapper Start -->
-    <div class="main-content-wrapper">
-        <div class="page-content-inner ptb--80">
-            <div class="container">
-                <div class="row no-gutters mb--80">
-                    <div class="col-12 col-sm-4 product-main-image d-flex align-content-center">
-                        {% if product.cover %}
-                            <img class="m-auto" style="max-height: 400px;" src="{{ product.cover.url }}" alt="">
-                        {% endif %}
-                    </div>
-                    <div class="col-12 col-sm-8 product-main-details mt-md--50">
-                        <div class="product-summary pl-lg--30 pl-md--0 text-right p-4">
-                            <h3 class="product-title mb--20">{{ product.title }}</h3>
-                            <p class="product-short-description mb--20">
-                                {{ product.description }}
-                            </p>
-                            <div class="my-5 py-5 product-price-wrapper mb--25">
-                                <span class="money text-success">۱۴۸,۰۰۰ تومان</span>
-                                <span class="price-separator">-</span>
-                                <span class="money old-price text-danger">۲۱۰,۰۰۰ تومان</span>
-                            </div>
-                            <div class="product-action d-flex align-items-sm-center align-content-center mb--30">
-                                <form action="{% url 'cart:cart_add' product.id %}" method="POST">
-                                    {% csrf_token %}
-{#                                    {{ add_to_cart_form.as_p }}#}
-{#                                    <button type="submit">add to cart</button>#}
-                                    <div class="quantity-wrapper d-flex justify-content-start">
-                                        <div class="quantity">
-                                            <input type="number" class="quantity-input" name="quantity" id="qty" value="1"
-                                                   min="1" max="30">
-                                        </div>
-                                    </div>
-                                    <button type="submit" class="btn btn-small btn-bg-red btn-color-white btn-hover-2"
-                                            onclick="window.location.href='cart.html'">
-                                        اضافه به سبد خرید
-                                    </button>
-                                </form>
-                            </div>
-                            <div class="product-footer-meta mt-5 pt-5">
-                                <p><span class="m-0">دسته بندی ها:</span>
-                                    <a href="shop.html">لباس</a>,
-                                    <a href="shop.html">تابستانی</a>,
-                                    <a href="shop.html">گرم</a>,
-                                    <a href="shop.html">زنانه</a>
-                                </p>
-                            </div>
+    <!-- Shop Detail Start -->
+    <div class="container-fluid py-5">
+        <div class="row px-xl-5">
+            <div class="col-lg-5 pb-5">
+                <div id="product-carousel" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner border">
+                        <div class="carousel-item active">
+                            {% if product.cover %}
+                                <img class="w-75 h-50" src="{{ product.cover.url }}" alt="Image">
+                            {% endif %}
                         </div>
                     </div>
                 </div>
-                <div class="row justify-content-center">
-                    <div class="col-12">
-                        <div class="product-data-tab tab-style-3">
-                            <div class="nav nav-tabs product-data-tab__head" id="product-tab" role="tablist">
-                                <a class="m-0 product-data-tab__link nav-link active" id="nav-description-tab"
-                                   data-toggle="tab" href="#nav-description" role="tab" aria-selected="true">
-                                    <span>توضیحات محصول</span>
-                                </a>
-                                <a class="m-0 product-data-tab__link nav-link" id="nav-info-tab" data-toggle="tab"
-                                   href="#nav-info" role="tab" aria-selected="true">
-                                    <span>ویژگی ها</span>
-                                </a>
-                                <a class="m-0 product-data-tab__link nav-link" id="nav-reviews-tab" data-toggle="tab"
-                                   href="#nav-reviews" role="tab" aria-selected="true">
-                                    <span>نظرات ({{ product.comments.all|only_active_comment|length }})</span>
-                                </a>
-                            </div>
-                            <div class="tab-content product-data-tab__content" id="product-tabContent">
-                                <div class="tab-pane fade show active" id="nav-description" role="tabpanel"
-                                     aria-labelledby="nav-description-tab">
-                                    <div class="product-description text-justify">
-                                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از
-                                            طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که
-                                            لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف
-                                            بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و
-                                            آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت
-                                            بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در
-                                            زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود
-                                            در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل
-                                            حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی
-                                            اساسا مورد استفاده قرار گیرد.لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
-                                            از صنعت چاپ، و با استفاده از
-                                            طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که
-                                            لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف
-                                            بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و
-                                            آینده، شناخت فراوان جامعه و متخصصان را می طلبد،
-                                            تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان
-                                            خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت
-                                            که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و
-                                            زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی،
-                                            و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار
-                                            گیرد.لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده
-                                            از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان
-                                            که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز،</p>
-                                        <p>
-                                            و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در
-                                            شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا
-                                            با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان
-                                            خلاقی، و فرهنگ پیشرو در زبان فارس
-                                            ی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه
-                                            راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی
-                                            دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد
-                                            استفاده قرار گیرد.</p>
+            </div>
 
-                                    </div>
+            <div class="col-lg-7 pb-5">
+                <h3 class="font-weight-semi-bold">نام محصول : {{ product.title }}</h3>
+                <br>
+                <h3 class="font-weight-semi-bold mb-4">قیمت محصول : {{ product.price|intcomma:False|translate_number }} تومان</h3>
+                <p>دسته بندی<a href="{% url 'product_category' product.category %}">
+                    : {{ product.category }}</a></p>
+                <div class="d-flex align-items-center mb-4 pt-2">
+                    <form action="{% url 'cart:cart_add' product.id %}" method="POST">
+                        {% csrf_token %}
+                        <div class="input-group quantity mr-3" style="width: 130px;">
+                            <div class="input-group-btn">
+                                <div class="quantity">
+                                    <input type="number" class="quantity-input" name="quantity" id="qty" value="1"
+                                           min="1" max="30">
                                 </div>
-                                <div class="tab-pane text-right" id="nav-info" role="tabpanel"
-                                     aria-labelledby="nav-info-tab">
-                                    <div class="table-content table-responsive">
-                                        <table class="table shop_attributes">
-                                            <tbody>
-                                            <tr>
-                                                <th>وزن</th>
-                                                <td>۴۳۰ گرم</td>
-                                            </tr>
-                                            <tr>
-                                                <th>سایز</th>
-                                                <td>XL</td>
-                                            </tr>
-                                            <tr>
-                                                <th>رنگ</th>
-                                                <td>
-                                                    <a href="shop-sidebar.html">مشکی</a>,
-                                                    <a href="shop-sidebar.html">سبز</a>,
-                                                    <a href="shop-sidebar.html">قرمز</a>,
-                                                    <a href="shop-sidebar.html">نارنجی</a>,
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="nav-reviews" role="tabpanel"
-                                     aria-labelledby="nav-reviews-tab">
-                                    <div class="product-reviews">
-                                        <h3 class="review__title">{{ product.comments.all|only_active_comment|length }} نظر برای {{ product.title }}</h3>
-                                        <ul class="review__list">
-                                            {% for comment in product.comments.all|only_active_comment %}
-                                                <li class="review__item">
-                                                    <div class="review__container">
-                                                        <div class="review__text">
-                                                            <div class="d-flex flex-sm-row flex-row">
-                                                                <img src="{% static 'img/others/comment-1.jpg' %}"
-                                                                     alt="Review Avatar" class="review__avatar">
-                                                                <div>
-                                                                    <div class="review__meta" dir="ltr">
-                                                                        <strong class="review__author px-4">{{ comment.author.username }}</strong>
-                                                                        <span class="review__dash">-</span>
-                                                                        <span class="review__published-date">{{ comment.datetime_created }}</span>
-                                                                    </div>
-                                                                    <div class="product-rating">
-                                                                        <div class="m-0 star-rating star-five">
-                                                                            <span>Rated <strong
-                                                                                    class="rating">{{ comment.stars }}</strong> out of 5</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <p class="review__description text-right px-4">
-                                                                {{ comment.body }}
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            {% endfor %}
-                                        </ul>
-                                        <div class="review-form-wrapper">
-                                            <div class="row">
-                                                <div class="border-top py-5 w-100"></div>
-                                                <div class="col-lg-8 m-auto">
-                                                    <br>
-                                                    {% if user.is_authenticated %}
-                                                    <form action="{% url 'comment_create' product.id %}" method="POST">
-                                                        {% csrf_token %}
-                                                        <span class="reply-title pull-right">نظر خود را بنویسید</span>
-                                                        {{ comment_form|crispy }}
-                                                        <input type="submit" value="{% trans 'Submit' %}">
-                                                    </form>
-                                                    {% else %}
-                                                        <p>
-                                                            to write your comment please
-                                                            <a href="{% url 'account_login' %}">Login</a>
-                                                        </p>
-                                                    {% endif %}
-{#                                                    <form action="#" class="form text-right">#}
-{#                                                        <div class="form-notes mb--20">#}
-{#                                                            <p class="my-3"><span class="required">*</span>ایمیل شما#}
-{#                                                                برای دیگران نشان داده نمیشود.</p>#}
-{#                                                        </div>#}
-{#                                                        <div class="form__group mb--10">#}
-{#                                                            <label class="form__label d-block" for="email">متن نظر#}
-{#                                                                شما<span class="required">*</span></label>#}
-{#                                                            <textarea name="review" id="review"#}
-{#                                                                      class="form__input form__input--textarea"></textarea>#}
-{#                                                        </div>#}
-{#                                                        <div class="form__group mb--20">#}
-{#                                                            <label class="form__label d-block" for="name">نام شما<span#}
-{#                                                                    class="required">*</span></label>#}
-{#                                                            <input type="text" name="name" id="name"#}
-{#                                                                   class="form__input">#}
-{#                                                        </div>#}
-{#                                                        <div class="form__group mb--20">#}
-{#                                                            <label class="form__label d-block" for="email">ایمیل#}
-{#                                                                شما<span class="required">*</span></label>#}
-{#                                                            <input type="email" name="email" id="email"#}
-{#                                                                   class="form__input">#}
-{#                                                        </div>#}
-{#                                                        <div class="form__group">#}
-{#                                                            <div class="form-row">#}
-{#                                                                <div class="col-12">#}
-{#                                                                    <input type="submit" value="ارسال"#}
-{#                                                                           class="btn-submit">#}
-{#                                                                </div>#}
-{#                                                            </div>#}
-{#                                                        </div>#}
-{#                                                    </form>#}
-{#                                                #}
-                                                </div>
-                                            </div>
+                            </div>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-primary px-3"
+                                onclick="window.location.href='cart.html'"><i class="fa fa-shopping-cart mr-1"></i>
+                            {% trans 'Add to cart' %}
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="row px-xl-5">
+            <div class="col">
+                <div class="nav nav-tabs justify-content-center border-secondary mb-4">
+                    <a class="nav-item nav-link active" data-toggle="tab"
+                       href="#tab-pane-1">{% trans 'Description' %}</a>
+                    <a class="nav-item nav-link" data-toggle="tab" href="#tab-pane-3">{% trans 'Reviews' %}
+                        ({{ product.comments.all|only_active_comment|length }})</a>
+                </div>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="tab-pane-1">
+                        <h4 class="mb-3">{% trans 'Product Description' %}</h4>
+                        <p>{{ product.description }}</p>
+                    </div>
+                    <div class="tab-pane fade" id="tab-pane-3">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4 class="mb-4">{% trans 'review for' %} "{{ product.title }}"</h4>
+                                {% for comment in product.comments.all|only_active_comment %}
+                                    <div class="media mb-4">
+                                        <div class="media-body">
+                                            <h6>{{ comment.author.username }}
+                                                <small> -
+                                                <i>{{ comment.datetime_created|to_jalali:'%Y/%m/%d'|translate_number }}</i>
+                                            </small>
+                                            </h6>
+                                            <p>{{ comment.body }}</p>
                                         </div>
                                     </div>
-                                </div>
+                                {% endfor %}
+                            </div>
+                            <div class="col-md-6">
+                                <h4 class="mb-4">{% trans 'Leave a review' %}</h4>
+                                <small>{% trans 'Your email address will not be published. Required fields are marked *' %}</small>
+                                {% if user.is_authenticated %}
+                                    <form action="{% url 'comment_create' product.id %}" method="POST">
+                                        {% csrf_token %}
+                                        {{ comment_form|crispy }}
+                                        {#                                        <div class="form-group">#}
+                                        {#                                            <label for="message">Your Review *</label>#}
+                                        {#                                            <textarea id="message" cols="30" rows="5" class="form-control"></textarea>#}
+                                        {#                                        </div>#}
+                                        {#                                        <div class="form-group">#}
+                                        {#                                            <label for="name">Your Name *</label>#}
+                                        {#                                            <input type="text" class="form-control" id="name">#}
+                                        {#                                        </div>#}
+                                        {#                                        <div class="form-group">#}
+                                        {#                                            <label for="email">Your Email *</label>#}
+                                        {#                                            <input type="email" class="form-control" id="email">#}
+                                        {#                                        </div>#}
+                                        <div class="form-group mb-0">
+                                            <input type="submit" value="{% trans 'Leave Your Review' %}"
+                                                   class="btn btn-primary px-3">
+                                        </div>
+                                    </form>
+                                {% else %}
+                                    <a href="{% url 'account_login' %}" class="nav-item nav-link">ورود</a>
+                                    <a href="{% url 'account_signup' %}" class="nav-item nav-link">ثبت نام</a>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -253,5 +134,5 @@
             </div>
         </div>
     </div>
-    <!-- Main Content Wrapper End -->
+    <!-- Shop Detail End -->
 {% endblock content %}

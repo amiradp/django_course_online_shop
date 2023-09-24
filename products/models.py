@@ -4,6 +4,16 @@ from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
 
 
+class Category(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse("product_detail", args=[self.pk])
+
+
 class Product(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
@@ -13,6 +23,8 @@ class Product(models.Model):
 
     datetime_created = models.DateTimeField(auto_now_add=True)
     datetime_modified = models.DateTimeField(auto_now=True)
+
+    category = models.CharField(max_length=100, default=_('uncategorized'))
 
     def __str__(self):
         return self.title
@@ -50,4 +62,4 @@ class Comment(models.Model):
     active_comments_manager = ActiveCommentsManager()
 
     def get_absolute_url(self):
-        return reverse('product_detail', args=[self.product.id  ])
+        return reverse('product_detail', args=[self.product.id])

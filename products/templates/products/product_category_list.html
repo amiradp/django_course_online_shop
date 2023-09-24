@@ -1,0 +1,53 @@
+{% extends '_base.html' %}
+{% load i18n %}
+
+{% block title %}
+    list
+{% endblock title %}
+
+{% block content %}
+    <body dir='rtl'>
+
+        {% for item in cat_menu %}
+            <div class="wrapper">
+        <!-- Products Start -->
+        <div class="container-fluid pt-5">
+            <div class="text-center mb-4">
+                <h2 class="section-title px-5"><span class="px-2">{{ item }}</span></h2>
+            </div>
+            <div class="row px-xl-5 pb-3">
+                {% for product in products %}
+                    <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                        <div class="card product-item border-0 mb-4">
+                            <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                                {% if product.cover %}
+                                    <img class="img-fluid w-100" src="{{ product.cover.url }}" alt="">
+                                {% endif %}
+                            </div>
+                            <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                                <h6 class="text-truncate mb-3">{{ product.title }}</h6>
+                                <div class="d-flex justify-content-center">
+                                    <h6>تومان {{ product.price }}</h6><h6 class="text-muted ml-2"></h6>
+                                </div>
+                            </div>
+                            <div class="card-footer d-flex justify-content-between bg-light border">
+                                <a href="{{ product.get_absolute_url }}" class="btn btn-sm text-dark p-0"><i
+                                        class="fas fa-eye text-primary mr-1"></i>{% trans 'View Detail' %}</a>
+                                <form action="{% url 'cart:cart_add' product.id %}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" class="quantity-input" name="quantity" id="qty" value="1"
+                                           min="1" max="30">
+                                    <button href="" class="btn btn-sm text-dark p-0"><i
+                                            class="fas fa-shopping-cart text-primary mr-1"></i>{% trans 'Add To Cart' %}</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+
+    <!-- Main Wrapper End -->
+    </body>
+{% endblock content %}

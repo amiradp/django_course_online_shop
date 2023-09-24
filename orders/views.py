@@ -37,6 +37,9 @@ def order_create_view(request):
             request.last_name = order_obj.last_name
             request.user.save()
 
+            request.session['order_id'] = order_obj.id
+            return redirect('payment:payment_process')
+
     return render(request, 'orders/order_created.html', {
         'form': order_form,
     })

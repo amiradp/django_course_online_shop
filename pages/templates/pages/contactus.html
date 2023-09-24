@@ -1,0 +1,21 @@
+{% extends '_base.html' %}
+
+{% load i18n %}
+
+{% block title %}
+    {% trans 'About us' %}
+{% endblock %}
+
+{% block content %}
+        <!-- Page Header Start -->
+    <div class="container-fluid bg-secondary mb-5">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">تماس با ما</h1>
+            <div class="d-inline-flex">
+                <p class="m-0"><a href="{% url 'ProductListView' %}">{% trans 'Home' %}</a></p>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+    <h1>تماس با ما</h1>
+{% endblock %}

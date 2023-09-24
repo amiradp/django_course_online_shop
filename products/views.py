@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
 
-from .models import Product, Comment
+from .models import Product, Comment, Category
 from .forms import CommentForm
 from cart.forms import AddToCartProductForm
 
@@ -11,6 +11,12 @@ class ProductListView(generic.ListView):
     queryset = Product.objects.filter(active=True)
     template_name = 'products/product_list.html'
     context_object_name = 'products'
+
+    def get_context_data(self, *args, **kwargs):
+        cat_menu = Category.objects.all()
+        context = super(ProductListView, self).get_context_data(*args, **kwargs)
+        context["cat_menu"] = cat_menu
+        return context
 
 
 class ProductDetailView(generic.DetailView):
@@ -39,3 +45,35 @@ class CommentCreateView(generic.CreateView):
         obj.product = product
 
         return super().form_valid(form)
+
+
+def category_view(request, cats):
+    category_post = Product.objects.filter(category=cats)
+    return render(request, 'products/category_list.html', {
+        'cats': cats.title(),
+        'category_post': category_post,
+    })
+
+
+def search_product(request):
+    if request.method == 'POST':
+        searched = request.POST['searched']
+        venues = Product.objects.filter(title__contains=searched)
+
+        return render(request, 'products/search_venues.html', {'searched': searched,
+                                                               'venues': venues
+                                                               })
+    else:
+        return render(request, 'products/search_venues.html', {})
+
+
+class ProductCategoryView(generic.ListView):
+    model = Product
+    template_name = 'products/product_category_list.html'
+    context_object_name = 'products'
+
+    def get_context_data(self, *args, **kwargs):
+        cat_menu = Category.objects.all()
+        context = super(ProductCategoryView, self).get_context_data(*args, **kwargs)
+        context["cat_menu"] = cat_menu
+        return context

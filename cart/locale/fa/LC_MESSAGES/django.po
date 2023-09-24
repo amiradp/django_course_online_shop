@@ -1,0 +1,84 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-09-15 19:31+0330\n"
+"PO-Revision-Date: 2023-09-15 20:58+0330\n"
+"Last-Translator:   <amir@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Translated-Using: django-rosetta 0.9.9\n"
+
+#: .\templates\cart\cart_detail.html:12 .\templates\cart\cart_detail.html:16
+msgid "Shopping Cart"
+msgstr "سبد خرید"
+
+#: .\templates\cart\cart_detail.html:14
+msgid "Home"
+msgstr "صفحه اصلی"
+
+#: .\templates\cart\cart_detail.html:29
+msgid "Products"
+msgstr "محصولات"
+
+#: .\templates\cart\cart_detail.html:30
+msgid "Price"
+msgstr "قیمت"
+
+#: .\templates\cart\cart_detail.html:31
+msgid "Quantity"
+msgstr "تعداد"
+
+#: .\templates\cart\cart_detail.html:32 .\templates\cart\cart_detail.html:82
+#: .\templates\cart\cart_sidebar.html:33
+msgid "Total"
+msgstr "مجموع"
+
+#: .\templates\cart\cart_detail.html:33
+msgid "Remove"
+msgstr "حذف"
+
+#: .\templates\cart\cart_detail.html:58
+msgid "Update"
+msgstr "آپدیت"
+
+#: .\templates\cart\cart_detail.html:77
+msgid "Cart Summary"
+msgstr ""
+
+#: .\templates\cart\cart_detail.html:86
+msgid "Proceed To Checkout"
+msgstr "ثبت محصول"
+
+#: .\templates\cart\cart_sidebar.html:8
+msgid "Cart"
+msgstr "سبد خرید"
+
+#: .\templates\cart\cart_sidebar.html:26
+msgid "$"
+msgstr "تومان"
+
+#: .\templates\cart\cart_sidebar.html:37
+msgid "Go To Cart"
+msgstr "برو به سبد خرید"
+
+#: .\templates\cart\cart_sidebar.html:38
+msgid "Checkout"
+msgstr ""
+
+#: .\views.py:55
+msgid "all product successfully remove from cart"
+msgstr "تمام محصولات با موفقیت از سبد خرید حذف شدند"
+
+#: .\views.py:57
+msgid "your cart is already empty"
+msgstr "سبد شما در حال حاضر خالی است"

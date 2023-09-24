@@ -52,8 +52,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'django.contrib.humanize',
+
     # third party apps
     "crispy_forms",
+    'jalali_date',
+    'rosetta',
     "crispy_bootstrap4",
     'allauth',
     'allauth.account',
@@ -64,6 +68,8 @@ INSTALLED_APPS = [
     'products',
     'cart',
     'orders',
+    'jalali'
+
 ]
 
 SITE_ID = 1
@@ -143,6 +149,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'fa'
 
+LANGUAGES = (
+    ('en', 'English'),
+    ('fa', 'Persian'),
+)
+
 TIME_ZONE = 'Asia/Tehran'
 
 USE_I18N = True
@@ -168,8 +179,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # accounts config
 AUTH_USER_MODEL = 'accounts.CustomUser'
-LOGIN_REDIRECT_URL = 'home'
-LOGOUT_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'ProductListView'
+LOGOUT_REDIRECT_URL = 'ProductListView'
 
 # crispy_forms settings
 CRISPY_TEMPLATE_PACK = "bootstrap4"
@@ -183,3 +194,5 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 # ACCOUNT_SESSION_REMEMBER = True
+
+ZARINPAL_MERCHANT_ID = env("DJANGO_ZARINPAL_MERCHANT_ID")
