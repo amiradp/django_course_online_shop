@@ -56,8 +56,6 @@ INSTALLED_APPS = [
 
     # third party apps
     "crispy_forms",
-    'jalali_date',
-    'rosetta',
     "crispy_bootstrap4",
     'allauth',
     'allauth.account',

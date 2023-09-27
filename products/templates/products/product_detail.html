@@ -4,7 +4,6 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% load comment_tags %}
-{% load jalali_tags %}
 {% load humanize %}
 
 {% load persian_translation_tags %}
@@ -91,7 +90,7 @@
                                         <div class="media-body">
                                             <h6>{{ comment.author.username }}
                                                 <small> -
-                                                <i>{{ comment.datetime_created|to_jalali:'%Y/%m/%d'|translate_number }}</i>
+                                                <i>{{ comment.datetime_created}}</i>
                                             </small>
                                             </h6>
                                             <p>{{ comment.body }}</p>
