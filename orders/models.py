@@ -17,6 +17,8 @@ class Order(models.Model):
     datetime_modified = models.DateTimeField(auto_now=True)
 
     zarinpal_authority = models.CharField(max_length=250, blank=True)
+    zarinpal_ref_id = models.CharField(max_length=150, blank=True)
+    zarinpal_data = models.TextField(blank=True)
 
     def __str__(self):
         return f'order {self.id}'

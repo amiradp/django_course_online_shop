@@ -15,9 +15,10 @@
     <link href="{% static 'img/favicon.ico' %}" rel="icon">
 
     <!-- Google Web Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
 
 
     <!-- Font Awesome -->
@@ -31,68 +32,71 @@
 </head>
 <body dir='rtl'>
 
-    <!-- Topbar Start -->
-    <div class="container-fluid">
-        <div class="row bg-secondary py-2 px-xl-5">
-            <div class="col-lg-6 d-none d-lg-block">
-                <div class="d-inline-flex align-items-center">
-                    <a class="text-dark" href="">{% trans 'Support' %}</a>
-                </div>
-            </div>
-            <div class="col-lg-6 text-center text-lg-right">
-                <div class="d-inline-flex align-items-center">
-                    <a class="text-dark px-2" href="https://t.me/989194505262">
-                        <i class="fab fa-telegram"></i>
-                    </a>
-                    <a class="text-dark px-2" href="https://instagram.com/protez_dandan_asadipor?igshid=NjIwNzIyMDk2Mg==">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a class="text-dark px-2" href="https://wa.me/989194505262">
-                        <i class="fab fa-whatsapp"></i>
-                    </a>
-                </div>
+<!-- Topbar Start -->
+<div class="container-fluid">
+    <div class="row bg-secondary py-2 px-xl-5">
+        <div class="col-lg-6 d-none d-lg-block">
+            <div class="d-inline-flex align-items-center">
+                <a class="text-dark" href="">{% trans 'Support' %}</a>
             </div>
         </div>
-        <div class="row align-items-center py-3 px-xl-5">
-            <div class="col-lg-3 d-none d-lg-block">
-                <a href="{% url 'ProductListView' %}" class="text-decoration-none">
-                    <h1 class="m-0 display-5 font-weight-semi-bold">پروتز دندان</h1>
+        <div class="col-lg-6 text-center text-lg-right">
+            <div class="d-inline-flex align-items-center">
+                <a class="text-dark px-2" href="https://t.me/989194505262">
+                    <i class="fab fa-telegram"></i>
                 </a>
-            </div>
-            <div class="col-lg-6 col-6 text-left">
-                <form action="{% url 'search_product' %}" method="POST">
-                    {% csrf_token %}
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="جستجو" name="searched">
-                        <div class="input-group-append">
-                            <span class="input-group-text bg-transparent text-primary">
-                                <button class="fa fa-search btn-primary" href="{% url 'search_product' %}"></button>
-                            </span>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="col-lg-3 col-6 text-right">
-                <a href="{% url 'cart:cart_detail' %}" class="btn border">
-                    <i class="fas fa-shopping-cart text-primary"></i>
-                    <span class="badge">{{ cart|length }}</span>
+                <a class="text-dark px-2" href="https://instagram.com/protez_dandan_asadipor?igshid=NjIwNzIyMDk2Mg==">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a class="text-dark px-2" href="https://wa.me/989194505262">
+                    <i class="fab fa-whatsapp"></i>
                 </a>
             </div>
         </div>
     </div>
-    <!-- Topbar End -->
-
+    <div class="row align-items-center py-3 px-xl-5">
+        <div class="col-lg-3 d-none d-lg-block">
+            <a href="{% url 'ProductListView' %}" class="text-decoration-none">
+                <h1 class="m-0 display-5 font-weight-semi-bold">پروتز دندان</h1>
+            </a>
+        </div>
+        <div class="col-lg-6 col-6 text-left">
+            <form action="{% url 'search_product' %}" method="POST">
+                {% csrf_token %}
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="جستجو" name="searched">
+                    <div class="input-group-append">
+                            <span class="input-group-text bg-transparent text-primary">
+                                <button class="fa fa-search btn-primary" href="{% url 'search_product' %}"></button>
+                            </span>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-3 col-6 text-right">
+            <a href="{% url 'cart:cart_detail' %}" class="btn border">
+                <i class="fas fa-shopping-cart text-primary"></i>
+                <span class="badge">{{ cart|length }}</span>
+            </a>
+        </div>
+    </div>
+</div>
+<!-- Topbar End -->
 
 
 <!-- Navbar Start -->
 <div class="container-fluid">
     <div class="row border-top px-xl-5">
-        <div class="col-lg-3 d-none d-lg-block">
-                <a class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; margin-top: -1px; padding: 0 30px;">
+        {% if cat_menu %}
+            <div class="col-lg-3 d-none d-lg-block">
+                <a class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100"
+                   data-toggle="collapse" href="#navbar-vertical"
+                   style="height: 65px; margin-top: -1px; padding: 0 30px;">
                     <h6 class="m-0">دسته بندی کالاها</h6>
                     <i class="fa fa-angle-down text-dark"></i>
                 </a>
-                <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 1;">
+                <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0 bg-light"
+                     id="navbar-vertical" style="width: calc(100% - 30px); z-index: 1;">
                     <div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
                         {% for item in cat_menu %}
                             <a href="{% url 'product_category' item %}" class="nav-item nav-link">{{ item }}</a>
@@ -100,6 +104,7 @@
                     </div>
                 </nav>
             </div>
+        {% endif %}
         <div class="col-lg-9">
             <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
                 <a href="{% url 'ProductListView' %}" class="text-decoration-none d-block d-lg-none">
@@ -114,7 +119,6 @@
                         <a href="{% url 'ProductListView' %}" class="nav-item nav-link">{% trans 'Home' %}</a>
                         <a href="{% url 'cart:cart_detail' %}" class="nav-item nav-link">سبد خرید</a>
                         <a href="{% url 'aboutus' %}" class="nav-item nav-link">درباره ما</a>
-                        <a href="{% url 'contactus' %}" class="nav-item nav-link">تماس با ما</a>
                     </div>
                     <div class="navbar-nav ml-auto py-0">
                         {% if user.is_authenticated %}
@@ -143,13 +147,16 @@
     <div class="row px-xl-5 pt-5">
         <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
             <a href="{% url 'ProductListView' %}" class="text-decoration-none">
-                <h1 class="mb-4 display-5 font-weight-semi-bold"><span
-                        class="text-primary font-weight-bold border border-white px-3 mr-1">E</span>Shopper</h1>
+                <h1 class="mb-4 display-5 font-weight-semi-bold">
+                    پروتز دندان
+                </h1>
             </a>
-            <p>Dolore erat dolor sit lorem vero amet. Sed sit lorem magna, ipsum no sit erat lorem et magna ipsum dolore
-                amet erat.</p>
-            <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street, New York, USA</p>
-            <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>info@example.com</p>
+            <p>
+                تمامی حقوق مادی و معنوی این وبسایت محفوظ می باشد و کپی برداری به هر نحوه پیگرد قانونی خواهد داشت
+            </p>
+            <p>
+                راه های ارتباطی
+            </p>
             <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>02155722231</p>
         </div>
         <div class="col-lg-8 col-md-12">
@@ -157,9 +164,10 @@
                 <div class="col-md-4 mb-5">
                     <h5 class="font-weight-bold text-dark mb-4">دسترسی سریع</h5>
                     <div class="d-flex flex-column justify-content-start">
-                        <a class="text-dark mb-2" href="{% url 'ProductListView' %}"><i class="fa fa-angle-right mr-2"></i>صفحه اصلی</a>
-                        <a class="text-dark mb-2" href="{% url 'aboutus' %}"><i class="fa fa-angle-right mr-2"></i>درباره ما</a>
-                        <a class="text-dark mb-2" href="{% url 'contactus' %}"><i class="fa fa-angle-right mr-2"></i>تماس با ما</a>
+                        <a class="text-dark mb-2" href="{% url 'ProductListView' %}"><i
+                                class="fa fa-angle-right mr-2"></i>صفحه اصلی</a>
+                        <a class="text-dark mb-2" href="{% url 'aboutus' %}"><i class="fa fa-angle-right mr-2"></i>درباره
+                            ما</a>
                         <a class="text-dark mb-2" href="{% url 'cart:cart_detail' %}"><i
                                 class="fa fa-angle-right mr-2"></i>سبد خرید</a>
                     </div>
@@ -170,15 +178,15 @@
     <div class="row border-top border-light mx-xl-5 py-4">
         <div class="col-md-6 px-xl-0">
             <p class="mb-md-0 text-center text-md-left text-dark">
-                &copy; <a class="text-dark font-weight-semi-bold" href="#">Your Site Name</a>. All Rights Reserved.
+                &copy; <a class="text-dark font-weight-semi-bold" href="#">protezdandan.com</a>. All Rights Reserved.
                 Designed
                 by
                 <a class="text-dark font-weight-semi-bold" href="https://htmlcodex.com">HTML Codex</a>
             </p>
         </div>
-        <div class="col-md-6 px-xl-0 text-center text-md-right">
-            <img class="img-fluid" src="{% static 'img/payments.png' %}" alt="">
-        </div>
+{#        <div class="col-md-6 px-xl-0 text-center text-md-right">#}
+{#            <img class="img-fluid" src="{% static 'img/payments.png' %}" alt="">#}
+{#        </div>#}
     </div>
 </div>
 <!-- Footer End -->
@@ -187,8 +195,11 @@
 <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
 
-<link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.0.0/css/bootstrap.min.css" integrity="sha384-P4uhUIGk/q1gaD/NdgkBIl3a6QywJjlsFJFk7SPRdruoGddvRVSwv5qFnvZ73cpz" crossorigin="anonymous">
-<script src="https://cdn.rtlcss.com/bootstrap/v4.0.0/js/bootstrap.min.js" integrity="sha384-54+cucJ4QbVb99v8dcttx/0JRx4FHMmhOWi4W+xrXpKcsKQodCBwAvu3xxkZAwsH" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.0.0/css/bootstrap.min.css"
+      integrity="sha384-P4uhUIGk/q1gaD/NdgkBIl3a6QywJjlsFJFk7SPRdruoGddvRVSwv5qFnvZ73cpz" crossorigin="anonymous">
+<script src="https://cdn.rtlcss.com/bootstrap/v4.0.0/js/bootstrap.min.js"
+        integrity="sha384-54+cucJ4QbVb99v8dcttx/0JRx4FHMmhOWi4W+xrXpKcsKQodCBwAvu3xxkZAwsH"
+        crossorigin="anonymous"></script>
 
 
 <!-- JavaScript Libraries -->

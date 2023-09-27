@@ -40,11 +40,11 @@ class ActiveCommentsManager(models.Manager):
 
 class Comment(models.Model):
     PRODUCT_STARS = [
-        ('1', 'Very Bad'),
-        ('2', 'Bad'),
-        ('3', 'Normal'),
-        ('4', 'Good'),
-        ('5', 'Perfect'),
+        ('1', 'خیلی بد'),
+        ('2', _('بد')),
+        ('3', _('معمولی')),
+        ('4', _('خوب')),
+        ('5', _('عالی')),
     ]
 
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='comments', )
