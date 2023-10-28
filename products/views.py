@@ -6,6 +6,18 @@ from .forms import CommentForm
 from cart.forms import AddToCartProductForm
 
 
+class MainCategoryList(generic.ListView):
+    model = Product
+    template_name = 'products/main_category_list.html'
+    context_object_name = 'products'
+
+    def get_context_data(self, *args, **kwargs):
+        cat_menu = Category.objects.all()
+        context = super(MainCategoryList, self).get_context_data(*args, **kwargs)
+        context["cat_menu"] = cat_menu
+        return context
+
+
 class ProductListView(generic.ListView):
     # model = Product
     queryset = Product.objects.filter(active=True)

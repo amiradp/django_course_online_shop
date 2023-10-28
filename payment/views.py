@@ -25,9 +25,9 @@ def payment_process(request):
         'accept': 'application/json',
         'content-type': 'application/json',
     }
-
+    # settings.ZARINPAL_MERCHANT_ID
     request_data = {
-        'merchant_id': settings.ZARINPAL_MERCHANT_ID,
+        'merchant_id': 'abcABCabcABCabcABCabcABCabcABCabcABC',
         'amount': rial_total_price,
         'description': f'#{order.id}: {order.user.first_name} {order.user.last_name}',
         'callback_url': request.build_absolute_uri(reverse('payment:payment_callback')),
@@ -62,7 +62,7 @@ def payment_callback(request):
         }
 
         request_data = {
-            'merchant_id': settings.ZARINPAL_MERCHANT_ID,
+            'merchant_id': 'abcABCabcABCabcABCabcABCabcABCabcABC',
             'amount': rial_total_price,
             'authority': payment_authority,
         }

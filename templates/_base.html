@@ -34,7 +34,7 @@
 
 <!-- Topbar Start -->
 <div class="container-fluid">
-    <div class="row bg-secondary py-2 px-xl-5">
+    <div class="row bg-light py-2 px-xl-5">
         <div class="col-lg-6 d-none d-lg-block">
             <div class="d-inline-flex align-items-center">
                 <a class="text-dark" href="">{% trans 'Support' %}</a>
@@ -116,7 +116,8 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto py-0">
-                        <a href="{% url 'ProductListView' %}" class="nav-item nav-link">{% trans 'Home' %}</a>
+                        <a href="{% url 'category_list' %}" class="nav-item nav-link">صفحه اصلی</a>
+                        <a href="{% url 'ProductListView' %}" class="nav-item nav-link">محصولات</a>
                         <a href="{% url 'cart:cart_detail' %}" class="nav-item nav-link">سبد خرید</a>
                         <a href="{% url 'aboutus' %}" class="nav-item nav-link">درباره ما</a>
                     </div>
@@ -164,8 +165,10 @@
                 <div class="col-md-4 mb-5">
                     <h5 class="font-weight-bold text-dark mb-4">دسترسی سریع</h5>
                     <div class="d-flex flex-column justify-content-start">
-                        <a class="text-dark mb-2" href="{% url 'ProductListView' %}"><i
+                        <a class="text-dark mb-2" href="{% url 'category_list' %}"><i
                                 class="fa fa-angle-right mr-2"></i>صفحه اصلی</a>
+                        <a class="text-dark mb-2" href="{% url 'ProductListView' %}"><i
+                                class="fa fa-angle-right mr-2"></i>محصولات</a>
                         <a class="text-dark mb-2" href="{% url 'aboutus' %}"><i class="fa fa-angle-right mr-2"></i>درباره
                             ما</a>
                         <a class="text-dark mb-2" href="{% url 'cart:cart_detail' %}"><i
@@ -184,9 +187,9 @@
                 <a class="text-dark font-weight-semi-bold" href="https://htmlcodex.com">HTML Codex</a>
             </p>
         </div>
-{#        <div class="col-md-6 px-xl-0 text-center text-md-right">#}
-{#            <img class="img-fluid" src="{% static 'img/payments.png' %}" alt="">#}
-{#        </div>#}
+        {#        <div class="col-md-6 px-xl-0 text-center text-md-right">#}
+        {#            <img class="img-fluid" src="{% static 'img/payments.png' %}" alt="">#}
+        {#        </div>#}
     </div>
 </div>
 <!-- Footer End -->
